@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes d'activités à Montréal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            page-break-after: always;
+        }
+        .card {
+            width: 50%;
+            height: 50%;
+            box-sizing: border-box;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-inner {
+            border: 2px solid #333;
+            border-radius: 12px;
+            height: 100%;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            z-index: 2;
+            flex-grow: 1;
+        }
+        .card-duration {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            z-index: 2;
+        }
+        .card-image {
+            height: 100px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 8px;
+        }
+        .card-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+            font-size: 12px;
+        }
+        .card-description {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .card-address {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .card-recommendations {
+            margin-top: 8px;
+        }
+        .card-recommendations h4 {
+            margin: 8px 0 4px 0;
+            font-size: 13px;
+            color: #444;
+        }
+        .recommendation {
+            margin-bottom: 4px;
+            font-size: 11px;
+        }
+        .recommendation-name {
+            font-weight: bold;
+        }
+        .recommendation-address {
+            font-style: italic;
+            color: #555;
+        }
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0) 100%);
+            border-radius: 8px 8px 0 0;
+            z-index: 1;
+        }
+        
+        /* Color themes for different card types */
+        .nature { background-color: #4CAF50; }
+        .culture { background-color: #9C27B0; }
+        .historic { background-color: #795548; }
+        .shopping { background-color: #FF5722; }
+        .urban { background-color: #2196F3; }
+        .religious { background-color: #3F51B5; }
+        .outdoor { background-color: #8BC34A; }
+        .art { background-color: #E91E63; }
+        
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="page">
+        <!-- Jardin botanique -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Jardin botanique de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Jardin botanique</h2>
+                    <div class="card-duration nature">3-4h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Explorez l'un des plus grands jardins botaniques du monde avec ses 10 serres d'exposition et une trentaine de jardins thématiques, dont le magnifique Jardin japonais et le Jardin de Chine.
+                    </p>
+                    <p class="card-address">
+                        4101 Rue Sherbrooke Est, Montréal, QC H1X 2B2
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Restaurant Le Jardin de Panos</span> -
+                            <span class="recommendation-address">521 Avenue Duluth Est</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café des Amis</span> -
+                            <span class="recommendation-address">4084 Rue Sherbrooke Est</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">L'Insectarium</span> -
+                            <span class="recommendation-address">4581 Rue Sherbrooke Est</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Musée Biodôme -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Biodôme de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Musée Biodôme</h2>
+                    <div class="card-duration nature">2-3h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Découvrez cinq écosystèmes des Amériques sous un même toit! Observez plus de 250 espèces animales et 500 espèces végétales dans des environnements recréés avec précision.
+                    </p>
+                    <p class="card-address">
+                        4777 Avenue Pierre-De Coubertin, Montréal, QC H1V 1B3
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Restaurant Chez Bouffe</span> -
+                            <span class="recommendation-address">4316 Rue Ontario Est</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café In Vivo</span> -
+                            <span class="recommendation-address">4731 Avenue Pierre-De Coubertin</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Planétarium Rio Tinto Alcan</span> -
+                            <span class="recommendation-address">4801 Avenue Pierre-De Coubertin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Parc Olympique / Quartier Hochelaga-Maisonneuve -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Parc Olympique de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Parc Olympique</h2>
+                    <div class="card-duration urban">Journée complète</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Visitez le site des Jeux olympiques de 1976 avec sa tour inclinée (la plus haute au monde) offrant une vue panoramique. Explorez également le quartier Hochelaga-Maisonneuve et ses trésors architecturaux.
+                    </p>
+                    <p class="card-address">
+                        4141 Avenue Pierre-De Coubertin, Montréal, QC H1V 3N7
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Le Blind Pig</span> -
+                            <span class="recommendation-address">4858 Rue Sainte-Catherine Est</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">La Belle Province</span> -
+                            <span class="recommendation-address">4039 Rue Ontario Est</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Marché Maisonneuve</span> -
+                            <span class="recommendation-address">4445 Rue Ontario Est</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vieux Montréal -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Vieux Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Vieux Montréal</h2>
+                    <div class="card-duration historic">4-5h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Flânez dans les rues pavées du Vieux Montréal pour admirer son architecture coloniale française, ses boutiques artisanales et ses cafés pittoresques. Ne manquez pas la magnifique Basilique Notre-Dame.
+                    </p>
+                    <p class="card-address">
+                        Centre: Place Jacques-Cartier, Montréal, QC H2Y 3B2
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Olive & Gourmando</span> -
+                            <span class="recommendation-address">351 Rue Saint-Paul Ouest</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Garde Manger</span> -
+                            <span class="recommendation-address">408 Rue Saint-François-Xavier</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Basilique Notre-Dame</span> -
+                            <span class="recommendation-address">110 Rue Notre-Dame Ouest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 2 -->
+    <div class="page">
+        <!-- Rue Sainte-Catherine -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Rue Sainte-Catherine">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Rue Sainte-Catherine</h2>
+                    <div class="card-duration shopping">3-4h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Principale artère commerciale de Montréal, la rue Sainte-Catherine offre des kilomètres de boutiques, de centres commerciaux et de restaurants. Idéale pour le shopping et l'observation de la vie urbaine montréalaise.
+                    </p>
+                    <p class="card-address">
+                        Rue Sainte-Catherine (entre Atwater et Berri)
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où magasiner:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Centre Eaton</span> -
+                            <span class="recommendation-address">705 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Simons</span> -
+                            <span class="recommendation-address">977 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                        <h4>Où manger:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Complexe Desjardins (food court)</span> -
+                            <span class="recommendation-address">150 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mont Royal -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Mont Royal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Mont Royal</h2>
+                    <div class="card-duration outdoor">4-5h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Randonnez jusqu'au Belvédère Kondiaronk pour une vue spectaculaire sur la ville. Profitez des sentiers, du lac aux Castors, et de l'ambiance paisible de ce poumon vert en plein cœur de Montréal.
+                    </p>
+                    <p class="card-address">
+                        1260 Chemin Remembrance, Montréal, QC H3H 1A2
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café des Amis</span> -
+                            <span class="recommendation-address">1260 Chemin Remembrance (près du lac aux Castors)</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Restaurant Le Plateau</span> -
+                            <span class="recommendation-address">4727 Rue Saint-Denis</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Cimetière Mont-Royal</span> -
+                            <span class="recommendation-address">1297 Chemin de la Forêt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Oratoire Saint-Joseph -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Oratoire Saint-Joseph">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Oratoire Saint-Joseph</h2>
+                    <div class="card-duration religious">2-3h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Découvrez le plus grand sanctuaire dédié à Saint Joseph en Amérique du Nord. Admirez son dôme imposant, montez les 283 marches (ou prenez l'ascenseur) et profitez de la vue panoramique sur Montréal.
+                    </p>
+                    <p class="card-address">
+                        3800 Chemin Queen Mary, Montréal, QC H3V 1H6
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café de l'Oratoire</span> -
+                            <span class="recommendation-address">3800 Chemin Queen Mary (dans l'Oratoire)</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Snowdon Deli</span> -
+                            <span class="recommendation-address">5265 Boulevard Décarie</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Université de Montréal</span> -
+                            <span class="recommendation-address">2900 Boulevard Édouard-Montpetit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ville souterraine -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Ville souterraine de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Ville souterraine</h2>
+                    <div class="card-duration urban">3-4h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Explorez le plus grand réseau piétonnier souterrain au monde (RÉSO) avec ses 32 km de tunnels reliant centres commerciaux, hôtels, universités et stations de métro. Parfait en cas de mauvais temps!
+                    </p>
+                    <p class="card-address">
+                        Entrée recommandée: Station de métro McGill, Montréal, QC H3A 1X6
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger sous terre:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Time Out Market</span> -
+                            <span class="recommendation-address">Centre Eaton, niveau métro</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Place Ville Marie Food Court</span> -
+                            <span class="recommendation-address">1 Place Ville Marie, niveau métro</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Galerie Marchande Complexe Desjardins</span> -
+                            <span class="recommendation-address">150 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 3 -->
+    <div class="page">
+        <!-- Vieux-Port de Montréal -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Vieux-Port de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Vieux-Port de Montréal</h2>
+                    <div class="card-duration urban">4-5h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Promenez-vous le long du fleuve Saint-Laurent et profitez de nombreuses activités: Grande Roue, Centre des sciences, croisières, location de vélos et patios ensoleillés.
+                    </p>
+                    <p class="card-address">
+                        333 Rue de la Commune Ouest, Montréal, QC H2Y 2E2
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café du Vieux-Port</span> -
+                            <span class="recommendation-address">39 Rue Saint-Paul Est</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Marché des Éclusiers</span> -
+                            <span class="recommendation-address">400 Rue de la Commune Ouest</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Grande Roue de Montréal</span> -
+                            <span class="recommendation-address">362 Rue de la Commune Est</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Centre-ville -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Centre-ville de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Centre-ville</h2>
+                    <div class="card-duration urban">Journée complète</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Explorez le cœur économique et culturel de Montréal avec ses gratte-ciels, ses galeries d'art contemporain, ses boutiques de luxe et ses nombreux restaurants et bars animés.
+                    </p>
+                    <p class="card-address">
+                        Centre: Boulevard René-Lévesque et Rue Peel
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Ferreira Café</span> -
+                            <span class="recommendation-address">1446 Rue Peel</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Le Comptoir du Chef</span> -
+                            <span class="recommendation-address">2112 Boulevard René-Lévesque Ouest</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Square Victoria</span> -
+                            <span class="recommendation-address">Rue McGill et Rue Saint-Jacques</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quartier des spectacles -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Quartier des spectacles">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Quartier des spectacles</h2>
+                    <div class="card-duration culture">3-4h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Visitez le cœur culturel de Montréal avec ses nombreuses salles de spectacle, la Place des Arts, le Musée d'art contemporain et ses installations lumineuses interactives. Lieu de grands festivals en été.
+                    </p>
+                    <p class="card-address">
+                        Place des Arts, 175 Rue Sainte-Catherine Ouest, Montréal, QC H2X 1Y9
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Brasserie T!</span> -
+                            <span class="recommendation-address">1425 Rue Jeanne-Mance</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Le Balmoral</span> -
+                            <span class="recommendation-address">305 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                        <h4>À voir aussi:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Musée d'art contemporain</span> -
+                            <span class="recommendation-address">185 Rue Sainte-Catherine Ouest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chinatown -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="Quartier chinois de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">Chinatown</h2>
+                    <div class="card-duration culture">2-3h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Découvrez le quartier asiatique de Montréal avec ses portes d'entrée traditionnelles, ses restaurants authentiques, ses épiceries exotiques et ses boutiques de souvenirs uniques.
+                    </p>
+                    <p class="card-address">
+                        Rue De La Gauchetière Ouest (entre Saint-Laurent et Saint-Urbain)
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Restaurant Impérial</span> -
+                            <span class="recommendation-address">1018 Rue Saint-Urbain</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Mai Xiang Yuan</span> -
+                            <span class="recommendation-address">1084 Boulevard Saint-Laurent</span>
+                        </div>
+                        <h4>Où magasiner:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Marché Hung Fatt</span> -
+                            <span class="recommendation-address">1001 Boulevard Saint-Laurent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 4 -->
+    <div class="page">
+        <!-- World Trade Centre de Montréal -->
+        <div class="card">
+            <div class="card-inner">
+                <img class="card-image" src="/api/placeholder/400/320" alt="World Trade Centre de Montréal">
+                <div class="image-overlay"></div>
+                <div class="card-header">
+                    <h2 class="card-title">World Trade Centre</h2>
+                    <div class="card-duration urban">1-2h</div>
+                </div>
+                <div class="card-content">
+                    <p class="card-description">
+                        Admirez ce magnifique complexe architectural qui intègre une façade historique et un atrium de verre abritant un tronçon de la Berlin Wall et une fontaine. Parfait pour une pause ou un café.
+                    </p>
+                    <p class="card-address">
+                        380 Rue Saint-Antoine Ouest, Montréal, QC H2Y 3X7
+                    </p>
+                    <div class="card-recommendations">
+                        <h4>Où manger à proximité:</h4>
+                        <div class="recommendation">
+                            <span class="recommendation-name">Café Castel</span> -
+                            <span class="recommendation-address">à l'intérieur du World Trade Centre</span>
+                        </div>
+                        <div class="recommendation">
+                            <span class="recommendation-name">A compléter</span> -
+                            <span class="recommendation-address">Adresse ã compléter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
